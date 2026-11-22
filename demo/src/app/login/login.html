@@ -1,0 +1,46 @@
+<main class="auth-page">
+  <div class="auth-shell">
+    <aside class="auth-intro">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>demo<span class="brand-light"> / workspace</span></span></div>
+      <div class="intro-content">
+        <p class="eyebrow intro-eyebrow">YOUR SPACE, YOUR WAY</p>
+        <h2>Good to have<br>you back.</h2>
+        <p>Pick up where you left off. Your workspace is just a sign-in away.</p>
+      </div>
+      <p class="intro-footer"><span aria-hidden="true"></span> A little space to get things done.</p>
+    </aside>
+
+    <section class="auth-content" aria-labelledby="login-title">
+      <div class="auth-inner">
+        <p class="eyebrow">WELCOME BACK</p>
+        <h2 id="login-title">Sign in to your account</h2>
+        <p class="subtitle">Enter your details below to continue.</p>
+
+        @if (successMessage) {
+          <p class="notice notice-success" role="status">{{ successMessage }}</p>
+        }
+        @if (errorMessage) {
+          <p class="notice notice-error" role="alert">{{ errorMessage }}</p>
+        }
+
+        <form #loginForm="ngForm" (ngSubmit)="loginForm.valid && backendLogin()">
+          <div class="field">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" [(ngModel)]="uname"
+              required autocomplete="username" placeholder="Enter your username">
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" [(ngModel)]="pwd"
+              required autocomplete="current-password" placeholder="Enter your password">
+          </div>
+          <button class="submit-button" type="submit" [disabled]="isLoading || loginForm.invalid">
+            <span>{{ isLoading ? 'Signing in...' : 'Sign in' }}</span><span aria-hidden="true">&#8594;</span>
+          </button>
+        </form>
+
+        <p class="auth-switch">New here? <a routerLink="/register">Create an account <span aria-hidden="true">&#8594;</span></a></p>
+      </div>
+    </section>
+  </div>
+</main>

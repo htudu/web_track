@@ -1,0 +1,9 @@
+:host {
+  display: block;
+  padding: 1.5rem;
+}
+
+button {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}

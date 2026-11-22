@@ -1,0 +1,65 @@
+<main class="auth-page">
+  <div class="auth-shell">
+    <aside class="auth-intro">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>demo<span class="brand-light"> / workspace</span></span></div>
+      <div class="intro-content">
+        <p class="eyebrow intro-eyebrow">A FRESH START</p>
+        <h2>Make space<br>for what's next.</h2>
+        <p>Create your account and make this workspace your own.</p>
+      </div>
+      <p class="intro-footer"><span aria-hidden="true"></span> A little space to get things done.</p>
+    </aside>
+
+    <section class="auth-content" aria-labelledby="register-title">
+      <div class="auth-inner">
+        <p class="eyebrow">GET STARTED</p>
+        <h2 id="register-title">Create your account</h2>
+        <p class="subtitle">A few details and you're all set.</p>
+
+        @if (errorMessage) {
+          <p class="notice notice-error" role="alert">{{ errorMessage }}</p>
+        }
+
+        <form #registerForm="ngForm" (ngSubmit)="registerForm.valid && onRegister()">
+          <div class="field">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" [(ngModel)]="username"
+              #usernameField="ngModel" required minlength="3" autocomplete="username"
+              placeholder="Choose a username" aria-describedby="username-hint"
+              [attr.aria-invalid]="usernameField.invalid && usernameField.touched">
+            <small id="username-hint" [class.field-error]="usernameField.invalid && usernameField.touched">
+              At least 3 characters.
+            </small>
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" [(ngModel)]="email"
+              #emailField="ngModel" required email autocomplete="email"
+              placeholder="you@example.com" aria-describedby="email-hint"
+              [attr.aria-invalid]="emailField.invalid && emailField.touched">
+            @if (emailField.invalid && emailField.touched) {
+              <small id="email-hint" class="field-error">Enter a valid email address.</small>
+            } @else {
+              <small id="email-hint">We'll use this for your account.</small>
+            }
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" [(ngModel)]="password"
+              #passwordField="ngModel" required minlength="6" autocomplete="new-password"
+              placeholder="Create a password" aria-describedby="password-hint"
+              [attr.aria-invalid]="passwordField.invalid && passwordField.touched">
+            <small id="password-hint" [class.field-error]="passwordField.invalid && passwordField.touched">
+              At least 6 characters.
+            </small>
+          </div>
+          <button class="submit-button" type="submit" [disabled]="isLoading || registerForm.invalid">
+            <span>{{ isLoading ? 'Creating account...' : 'Create account' }}</span><span aria-hidden="true">&#8594;</span>
+          </button>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a routerLink="/login">Sign in <span aria-hidden="true">&#8594;</span></a></p>
+      </div>
+    </section>
+  </div>
+</main>
